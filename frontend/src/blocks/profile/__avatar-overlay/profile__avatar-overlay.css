@@ -1,0 +1,23 @@
+.profile__avatar-overlay {
+  position: relative;
+}
+
+.profile__avatar-overlay::before {
+  background: url(../../../images/editavatar.svg) no-repeat center rgb(0,0,0, .8);
+  border-radius: 50%;
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  opacity: 0;
+  width: 121px;
+  height: 121px;
+  z-index: 1;
+  transition: opacity .2s;
+}
+
+.profile__avatar-overlay:hover::before {
+  opacity: 1;
+}

@@ -1,0 +1,6 @@
+.element__remove-button_hidden {
+  opacity: 0;
+  padding: 0;
+  grid-row: 1/2;
+  z-index: -1;
+}

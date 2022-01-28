@@ -1,0 +1,11 @@
+.auth__login {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+@media screen and (max-width:768px) {
+  .auth__login {
+    margin-top: 21px;
+  }
+}

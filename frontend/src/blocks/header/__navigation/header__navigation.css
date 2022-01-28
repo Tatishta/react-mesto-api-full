@@ -1,0 +1,6 @@
+.header__navigation {
+  align-items: baseline;
+  display: grid;
+  gap: 24px;
+  grid-auto-flow: column;
+}
