@@ -93,7 +93,6 @@ class Api {
   }}
 }
 
-export const newApi = new Api('https://mesto.nomoreparties.co/v1/cohort-28', {
-  authorization: '4e5510c0-c313-4452-9bc3-e4f594fb4897',
+export const newApi = new Api('http://difang.nomoredomains.work/api', {
   'Content-Type': 'application/json'
 });

@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co';
+export const BASE_URL = 'http://difang.nomoredomains.work/api';
 
 const getResult = (res) => {
     if (res.ok) {
