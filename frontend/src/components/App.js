@@ -71,9 +71,7 @@ function App() {
 }, [])
 
   React.useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      auth.checkToken(jwt).then((res) => {
+      auth.checkToken().then((res) => {
       if (res) {
         setUserEmail(res.data.email);
         setLoggedIn(true);
@@ -82,7 +80,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-    }}, [loggedIn, setUserEmail, setLoggedIn, navigate]);
+    }, [loggedIn, setUserEmail, setLoggedIn, navigate]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -199,13 +197,8 @@ function App() {
 
   const handleLogin = (email, password) => {
     return auth.authorize(email, password)
-      .then((data) => {
-      if (!data) {
-        throw new Error("Что-то пошло не так");
-      }
-      if (data.token) {
+      .then(() => {
         setLoggedIn(true);
-      }
       })
       .catch(() => {
         setTooltipImage(error);

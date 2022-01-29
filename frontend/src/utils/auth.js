@@ -33,7 +33,7 @@ export const authorize = (email, password) => {
   .then(getResult)
 }
 
-export const checkToken = (token) => {
+export const checkToken = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
