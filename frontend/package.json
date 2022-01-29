@@ -2,7 +2,7 @@
   "name": "mesto-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tatishta.github.io/react-mesto-auth/",
+  "homepage": "http://difang.nomoredomains.work/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
