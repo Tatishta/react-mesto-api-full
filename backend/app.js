@@ -1,16 +1,15 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
-const helmet = require('helmet');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-
-require('dotenv').config();
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -31,8 +30,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 })
   .then(() => console.log('You are connected to MongoDB, yay!'))
   .catch((err) => console.log({ err }));
-
-app.use(helmet());
 
 app.use(requestLogger);
 
