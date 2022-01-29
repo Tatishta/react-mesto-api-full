@@ -13,14 +13,16 @@ class Api {
 
   getInitialCards() {
     return fetch(this._url + '/cards', {
-      headers: this._headerOptions
+      headers: this._headerOptions,
+      credentials: 'include',
     })
     .then(this._getResult);
   }
 
   getMyInfo() {
     return fetch(this._url + '/users/me', {
-    headers: this._headerOptions
+      headers: this._headerOptions,
+      credentials: 'include',
     })
     .then(this._getResult);
   }
@@ -29,6 +31,7 @@ class Api {
     return fetch(this._url + '/users/me', {
     method: 'PATCH',
     headers: this._headerOptions,
+    credentials: 'include',
     body: JSON.stringify({
       name: name,
       about: about
@@ -41,6 +44,7 @@ class Api {
     return fetch(this._url + '/users/me/avatar', {
       method: 'PATCH',
       headers: this._headerOptions,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: avatar,
       })
@@ -52,6 +56,7 @@ class Api {
     return fetch(this._url + '/cards', {
     method: 'POST',
     headers: this._headerOptions,
+    credentials: 'include',
     body: JSON.stringify({
       name: name,
       link: link
@@ -64,6 +69,7 @@ class Api {
     return fetch(this._url + '/cards/' + cardId, {
       method: 'DELETE',
       headers: this._headerOptions,
+      credentials: 'include',
       body: JSON.stringify({
         id: cardId
       })
@@ -76,6 +82,7 @@ class Api {
     return fetch(this._url + '/cards/likes/' + cardId, {
       method: 'PUT',
       headers: this._headerOptions,
+      credentials: 'include',
       body: JSON.stringify({
         id: cardId
       })
@@ -85,6 +92,7 @@ class Api {
     return fetch(this._url + '/cards/likes/' + cardId, {
       method: 'DELETE',
       headers: this._headerOptions,
+      credentials: 'include',
       body: JSON.stringify({
         id: cardId
       })

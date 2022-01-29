@@ -39,19 +39,19 @@ app.use(helmet());
 
 app.use(requestLogger);
 
-app.get('/crash-test', () => {
+app.get('/api/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 
-app.post('/signin', celebrate({
+app.post('/api/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(5),
   }).unknown(true),
 }), login);
-app.post('/signup', celebrate({
+app.post('/api/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(5),
@@ -63,8 +63,8 @@ app.post('/signup', celebrate({
 
 app.use(auth);
 
-app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/cards', require('./routes/cards'));
 
 app.use('*', () => {
   throw new NotFoundError('Такой страницы не существует, проверьте адрес');

@@ -14,7 +14,8 @@ export const register = (email, password) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({email, password})
+      body: JSON.stringify({email, password}),
+      credentials: 'include',
     })
     .then(getResult)
 }
@@ -26,14 +27,10 @@ export const authorize = (email, password) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({email, password})
+    body: JSON.stringify({email, password}),
+    credentials: 'include',
   })
   .then(getResult)
-  .then((data) => {
-    if (data.token) {
-      localStorage.setItem('jwt', data.token);
-      return data;
-  }})
 }
 
 export const checkToken = (token) => {
@@ -42,7 +39,8 @@ export const checkToken = (token) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization' : `Bearer ${token}`
-  }})
+    },
+    credentials: 'include',
+  })
   .then(getResult)
 }
