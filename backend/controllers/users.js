@@ -131,13 +131,16 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        NODE_ENV === 'production' ? JWT_SECRET : 'secret-key',
         { expiresIn: '7d' },
       );
       res
         .cookie('jwt', token, {
+          domain: '.difang.nomoredomains.work',
           maxAge: week,
-          httpOnly: true,
+          httpOnly: false,
+          sameSite: false,
+          secure: false,
         })
         .send({ message: 'Вы успешно авторизировались!' });
     })

@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://difang.nomoredomains.work/api';
+export const BASE_URL = 'https://api.difang.nomoredomains.work';
 
 const getResult = (res) => {
     if (res.ok) {

@@ -15,7 +15,12 @@ require('dotenv').config();
 const { PORT = 3000 } = process.env;
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://difang.nomoredomains.work'],
+  allowedHeaders: ['Access-Control-Allow-Credentials', 'Access-Control-Allow-Origin', 'Content-Type'],
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+  credentials: true,
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,19 +36,19 @@ app.use(helmet());
 
 app.use(requestLogger);
 
-app.get('/api/crash-test', () => {
+app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 
-app.post('/api/signin', celebrate({
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(5),
   }).unknown(true),
 }), login);
-app.post('/api/signup', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required().min(5),
@@ -55,8 +60,8 @@ app.post('/api/signup', celebrate({
 
 app.use(auth);
 
-app.use('/api/users', require('./routes/users'));
-app.use('/api/cards', require('./routes/cards'));
+app.use('/users', require('./routes/users'));
+app.use('/cards', require('./routes/cards'));
 
 app.use('*', () => {
   throw new NotFoundError('Такой страницы не существует, проверьте адрес');
