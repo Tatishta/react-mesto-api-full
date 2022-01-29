@@ -101,6 +101,6 @@ class Api {
   }}
 }
 
-export const newApi = new Api('http://difang.nomoredomains.work/api', {
+export const newApi = new Api('https://difang.nomoredomains.work/api', {
   'Content-Type': 'application/json'
 });
