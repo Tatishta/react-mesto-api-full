@@ -71,7 +71,7 @@ function App() {
     const isLiked = card.likes.includes(currentUser._id);
     newApi.stateLike(card._id, isLiked)
       .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        setCards((state) => state.map((c) => c._id === card._id ? newCard.card : c));
       })
       .catch((err) => {
         console.log(err);
