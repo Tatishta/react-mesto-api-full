@@ -14,10 +14,21 @@ export const register = (email, password) => {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({email, password}),
-      credentials: 'include',
+      body: JSON.stringify({
+        email: email,
+        passwodr: password
+      })
     })
     .then(getResult)
+    .then(body => {
+      if (body.error) {
+        return {error: body.error};
+      }
+      if (body.message) {
+        return {error: body.message};
+      }
+      return {email: body.user.email};
+    });
 }
 
 export const authorize = (email, password) => {
@@ -43,4 +54,7 @@ export const checkToken = () => {
     credentials: 'include',
   })
   .then(getResult)
+  .then((data) => {
+    return data;
+  })
 }
