@@ -20,15 +20,6 @@ export const register = (email, password) => {
       })
     })
     .then(getResult)
-    .then(body => {
-      if (body.error) {
-        return {error: body.error};
-      }
-      if (body.message) {
-        return {error: body.message};
-      }
-      return {email: body.user.email};
-    });
 }
 
 export const authorize = (email, password) => {
