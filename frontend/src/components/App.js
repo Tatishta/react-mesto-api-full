@@ -193,11 +193,17 @@ function App() {
       })
   };
 
-  function signOut(){
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    navigate("/sign-in");
-  }
+  const handleSignOut = () => {
+    auth.signOut()
+    .then(() => {
+      setUserEmail("");
+      setLoggedIn(false);
+      navigate("/sign-in");
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  };
 
   return (
     <div className="App">
@@ -207,7 +213,7 @@ function App() {
             <Header
               login={userEmail}
               loggedIn={loggedIn}
-              signOut={signOut}/>
+              signOut={handleSignOut}/>
             <Routes>
               <Route path="/" element={
               <ProtectedRoute redirectTo="/sign-in" loggedIn={loggedIn}>

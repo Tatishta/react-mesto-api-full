@@ -16,7 +16,7 @@ export const register = (email, password) => {
       },
       body: JSON.stringify({
         email: email,
-        passwodr: password
+        password: password
       })
     })
     .then(getResult)
@@ -57,4 +57,16 @@ export const checkToken = () => {
   .then((data) => {
     return data;
   })
+}
+
+export const signOut = () => {
+  return fetch(`${BASE_URL}/signout`, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    credentials: 'include',
+  })
+  .then(getResult)
 }
