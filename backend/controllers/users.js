@@ -10,7 +10,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send(users))
+    .then((users) => res.send({ data: users }))
     .catch(next);
 };
 
@@ -20,7 +20,7 @@ module.exports.getUserInfo = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден.'));
       } else {
-        res.send(user);
+        res.send({ user });
       }
     })
     .catch(next);
@@ -32,7 +32,7 @@ module.exports.getUserById = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден.'));
       } else {
-        res.send(user);
+        res.send({ data: user });
       }
     })
     .catch((err) => {
@@ -58,7 +58,14 @@ module.exports.createUser = (req, res, next) => {
     .then((hash) => User.create({
       name, about, avatar, email, password: hash,
     }))
-    .then((user) => res.status(201).send({ user }))
+    .then((user) => res.status(201).send({
+      data: {
+        name: user.name,
+        about: user.about,
+        avatar: user.avatar,
+        email: user.email,
+      },
+    }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new ValidationError('Для создания пользователя отправлены некорректные данные.'));
@@ -81,7 +88,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден.'));
       } else {
-        res.send(user);
+        res.send({ data: user });
       }
     })
     .catch((err) => {
@@ -104,7 +111,7 @@ module.exports.updateUserAvatar = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден.'));
       } else {
-        res.send(user);
+        res.send({ data: user });
       }
     })
     .catch((err) => {
