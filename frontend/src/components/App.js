@@ -38,7 +38,7 @@ function App() {
   React.useEffect(() => {
     newApi.getInitialCards()
     .then((cardResult) => {
-      setCards(cardResult);
+      setCards(cardResult.cards);
     })
     .catch((err) => {
       console.log(err);
@@ -107,7 +107,7 @@ function App() {
   function handleAddPlace(name, link) {
     newApi.addCard(name, link)
     .then((newCard) => {
-      setCards([newCard, ...cards]);
+      setCards([newCard.card, ...cards]);
       closeAllPopups();
     })
     .catch((err) => {
@@ -120,8 +120,8 @@ function App() {
     .then((res) => {
       setCurrentUser({
         ...currentUser,
-        name: res.name,
-        about: res.about,
+        name: res.user.name,
+        about: res.user.about,
       });
       closeAllPopups();
     })
@@ -134,10 +134,10 @@ function App() {
     newApi.getNewAvatar(avatar)
     .then((res) => {
       setCurrentUser({
-        name: res.name,
-        about: res.about,
-        avatar: res.avatar,
-        _id: res._id
+        name: res.user.name,
+        about: res.user.about,
+        avatar: res.user.avatar,
+        _id: res.user._id
       });
       closeAllPopups();
     })
