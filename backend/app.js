@@ -15,7 +15,7 @@ const { PORT = 3000 } = process.env;
 const app = express();
 
 app.use(cors({
-  origin: ['https://difang.nomoredomains.work'],
+  origin: ['https://difang.nomoredomains.work', 'http://difang.nomoredomains.work'],
   allowedHeaders: ['Access-Control-Allow-Credentials', 'Access-Control-Allow-Origin', 'Content-Type'],
   methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
   credentials: true,
