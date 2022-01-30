@@ -49,10 +49,10 @@ function App() {
     newApi.getMyInfo()
     .then((res) => {
       setCurrentUser({
-        name: res.name,
-        about: res.about,
-        avatar: res.avatar,
-        _id: res._id
+        name: res.user.name,
+        about: res.user.about,
+        avatar: res.user.avatar,
+        _id: res.user._id
       })
     })
     .catch((err) => {
@@ -73,7 +73,7 @@ function App() {
   React.useEffect(() => {
       auth.checkToken().then((res) => {
       if (res) {
-        setUserEmail(res.data.email);
+        setUserEmail(res.user.email);
         setLoggedIn(true);
         navigate("/");
       }})
