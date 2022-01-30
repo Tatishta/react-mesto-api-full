@@ -60,6 +60,15 @@ app.use(auth);
 app.use('/users', require('./routes/users'));
 app.use('/cards', require('./routes/cards'));
 
+app.post('/signout', (req, res) => {
+  res.status(200).clearCookie('jwt', {
+    domain: '.difang.nomoredomains.work',
+    httpOnly: false,
+    sameSite: false,
+    secure: false,
+  }).send({ message: 'Успешный выход из приложения' });
+});
+
 app.use('*', () => {
   throw new NotFoundError('Такой страницы не существует, проверьте адрес');
 });
