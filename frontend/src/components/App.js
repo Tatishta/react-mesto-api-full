@@ -104,9 +104,10 @@ function App() {
     newApi.editUserInfo(name, about)
     .then((res) => {
       setCurrentUser({
-        ...currentUser,
         name: res.user.name,
         about: res.user.about,
+        avatar: res.user.avatar,
+        _id: res.user._id
       });
       closeAllPopups();
     })
