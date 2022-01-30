@@ -88,7 +88,7 @@ module.exports.updateUser = (req, res, next) => {
       if (!user) {
         next(new NotFoundError('Пользователь не найден.'));
       } else {
-        res.send({ data: user });
+        res.send({ user });
       }
     })
     .catch((err) => {
