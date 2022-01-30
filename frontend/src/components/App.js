@@ -36,31 +36,6 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
-    newApi.getInitialCards()
-    .then((cardResult) => {
-      setCards(cardResult.cards);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }, []);
-
-  React.useEffect(() => {
-    newApi.getMyInfo()
-    .then((res) => {
-      setCurrentUser({
-        name: res.user.name,
-        about: res.user.about,
-        avatar: res.user.avatar,
-        _id: res.user._id
-      })
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-  }, []);
-
-  React.useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
         closeAllPopups();
@@ -76,14 +51,24 @@ function App() {
         setUserEmail(res.user.email);
         setLoggedIn(true);
         navigate("/");
+        Promise.all([
+          newApi.getInitialCards().then((cardResult) => setCards(cardResult.cards)),
+          newApi.getMyInfo().then((res) => {
+            setCurrentUser({
+              name: res.user.name,
+              about: res.user.about,
+              avatar: res.user.avatar,
+              _id: res.user._id
+            });
+          })])
       }})
       .catch((err) => {
         console.log(err);
       })
-    }, [loggedIn, setUserEmail, setLoggedIn, navigate]);
+    }, [navigate]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.includes(currentUser._id);
     newApi.stateLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard.card : c));
